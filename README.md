@@ -76,6 +76,24 @@ Skip certain data types during redaction:
 ./bin/redact --model=claude-haiku-4-5 document.txt
 ```
 
+## Web Server
+
+Run redact as a web application with an interactive UI:
+
+```bash
+# Build and run the server
+make server
+./bin/server
+
+# Custom port (default: 8080)
+PORT=3000 ./bin/server
+
+# Custom Claude model
+REDACT_MODEL=claude-haiku-4-5 ./bin/server
+```
+
+Open http://localhost:8080 in your browser to use the web interface.
+
 ## Running Evaluations
 
 The tool includes an evaluation system to measure precision and recall:

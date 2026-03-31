@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redact - Sensitive Data Redaction Tool</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .controls {
+            background: white;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .controls-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .pattern-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pattern-type {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .pattern-type:hover {
+            background: #e0e0e0;
+        }
+
+        .pattern-type input {
+            cursor: pointer;
+        }
+
+        .pattern-type.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pattern-type.disabled input {
+            cursor: not-allowed;
+        }
+
+        .pattern-type .llm-badge {
+            font-size: 0.7rem;
+            background: #9b59b6;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .options {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bleep-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .bleep-toggle:hover {
+            background: #e0e0e0;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .panel-body {
+            flex: 1;
+            padding: 0;
+            position: relative;
+        }
+
+        textarea {
+            width: 100%;
+            height: 400px;
+            padding: 16px;
+            border: none;
+            resize: vertical;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            outline: none;
+        }
+
+        textarea:focus {
+            box-shadow: inset 0 0 0 2px #3498db;
+        }
+
+        .output {
+            width: 100%;
+            height: 400px;
+            padding: 16px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .output .placeholder {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .output .bleep {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .submit-btn {
+            padding: 8px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: #2980b9;
+        }
+
+        .submit-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+
+        .submit-btn.loading .spinner {
+            display: block;
+        }
+
+        .submit-btn.loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .status-bar {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+            font-size: 0.8rem;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 10px 16px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        .api-warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px 16px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Redact</h1>
+            <p>Redact sensitive data from text using pattern matching and AI</p>
+        </header>
+
+        <div class="error-message" id="error"></div>
+        <div class="api-warning" id="api-warning" style="display: none;">
+            API key not configured. Person names and obfuscated data detection are disabled.
+        </div>
+
+        <div class="controls">
+            <div class="controls-header">
+                <div class="pattern-types" id="pattern-types">
+                    <!-- Populated by JavaScript -->
+                </div>
+                <div class="options">
+                    <label class="bleep-toggle">
+                        <input type="checkbox" id="bleep-mode">
+                        <span>Bleep Mode (***)</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Input</h2>
+                    <button class="submit-btn" id="submit-btn">
+                        <span class="btn-text">Redact</span>
+                        <div class="spinner"></div>
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <textarea id="input" placeholder="Enter text to redact..."></textarea>
+                </div>
+                <div class="status-bar">
+                    <span id="input-stats">0 characters</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Redacted Output</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="output" id="output"></div>
+                </div>
+                <div class="status-bar">
+                    <span id="output-stats">0 redactions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inputEl = document.getElementById('input');
+        const outputEl = document.getElementById('output');
+        const submitBtn = document.getElementById('submit-btn');
+        const bleepMode = document.getElementById('bleep-mode');
+        const patternTypesEl = document.getElementById('pattern-types');
+        const errorEl = document.getElementById('error');
+        const apiWarningEl = document.getElementById('api-warning');
+        const inputStats = document.getElementById('input-stats');
+        const outputStats = document.getElementById('output-stats');
+
+        let patternTypes = [];
+        let hasAPIKey = false;
+        let isLoading = false;
+
+        // Initialize
+        async function init() {
+            try {
+                const resp = await fetch('/api/types');
+                const data = await resp.json();
+                patternTypes = data.types;
+                hasAPIKey = data.hasAPIKey;
+
+                if (!hasAPIKey) {
+                    apiWarningEl.style.display = 'block';
+                }
+
+                renderPatternTypes();
+            } catch (err) {
+                showError('Failed to load pattern types: ' + err.message);
+            }
+        }
+
+        function renderPatternTypes() {
+            patternTypesEl.innerHTML = patternTypes.map(type => {
+                const disabled = type.requiresLLM && !hasAPIKey;
+                const checked = !disabled ? 'checked' : '';
+                const disabledAttr = disabled ? 'disabled' : '';
+                const disabledClass = disabled ? 'disabled' : '';
+                const llmBadge = type.requiresLLM ? '<span class="llm-badge">AI</span>' : '';
+
+                return `
+                    <label class="pattern-type ${disabledClass}">
+                        <input type="checkbox" value="${type.name}" ${checked} ${disabledAttr}>
+                        <span>${type.label}</span>
+                        ${llmBadge}
+                    </label>
+                `;
+            }).join('');
+        }
+
+        function getSelectedTypes() {
+            const checkboxes = patternTypesEl.querySelectorAll('input[type="checkbox"]:checked');
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+
+        function showError(message) {
+            errorEl.textContent = message;
+            errorEl.classList.add('visible');
+            setTimeout(() => errorEl.classList.remove('visible'), 5000);
+        }
+
+        function setLoading(loading) {
+            isLoading = loading;
+            submitBtn.disabled = loading;
+            submitBtn.classList.toggle('loading', loading);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function renderOutput(text, labels, bleepModeEnabled) {
+            if (!labels || labels.length === 0) {
+                outputEl.innerHTML = escapeHtml(text);
+                outputStats.textContent = '0 redactions';
+                return;
+            }
+
+            // Sort labels by offset (descending) for replacement
+            const sortedLabels = [...labels].sort((a, b) => b.offset - a.offset);
+
+            let result = text;
+            for (const label of sortedLabels) {
+                const before = result.substring(0, label.offset);
+                const after = result.substring(label.offset + label.length);
+                const placeholder = bleepModeEnabled ? '***' : `<${label.type}>`;
+                const className = bleepModeEnabled ? 'bleep' : 'placeholder';
+                result = before + `\x00${className}\x01${placeholder}\x02` + after;
+            }
+
+            // Escape HTML and then restore our markers
+            result = escapeHtml(result);
+            result = result.replace(/\x00(\w+)\x01([^]*?)\x02/g, '<span class="$1">$2</span>');
+
+            outputEl.innerHTML = result;
+            outputStats.textContent = `${labels.length} redaction${labels.length !== 1 ? 's' : ''}`;
+        }
+
+        async function submit() {
+            const text = inputEl.value.trim();
+            if (!text) {
+                showError('Please enter some text to redact');
+                return;
+            }
+
+            const types = getSelectedTypes();
+            if (types.length === 0) {
+                showError('Please select at least one pattern type');
+                return;
+            }
+
+            setLoading(true);
+
+            try {
+                const resp = await fetch('/api/redact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        text: text,
+                        types: types,
+                        bleep_mode: bleepMode.checked
+                    })
+                });
+
+                const data = await resp.json();
+
+                if (data.error) {
+                    showError(data.error);
+                } else {
+                    renderOutput(text, data.labels, bleepMode.checked);
+                }
+            } catch (err) {
+                showError('Request failed: ' + err.message);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        // Event listeners
+        submitBtn.addEventListener('click', submit);
+
+        inputEl.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+                submit();
+            }
+        });
+
+        inputEl.addEventListener('input', () => {
+            inputStats.textContent = `${inputEl.value.length} characters`;
+        });
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>
