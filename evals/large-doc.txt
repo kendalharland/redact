@@ -1,0 +1,108 @@
+CONFIDENTIAL MEMO
+
+From: Jennifer Martinez, Senior Vice President
+To: All Department Heads
+Date: March 15, 2024
+Subject: Q1 2024 Employee Directory Update
+
+Dear Team,
+
+Please review the following directory information for accuracy. Contact the HR department if any corrections are needed.
+
+EXECUTIVE TEAM
+--------------
+CEO: Michael Chen
+Email: michael.chen@acmecorp.com
+Phone: (415) 555-0100
+Office: San Francisco HQ
+
+CFO: Amanda Williams
+Email: amanda.williams@acmecorp.com
+Phone: (415) 555-0101
+Office: San Francisco HQ
+
+CTO: David Park
+Email: david.park@acmecorp.com
+Phone: (415) 555-0102
+Office: San Francisco HQ
+
+ENGINEERING DEPARTMENT
+----------------------
+VP of Engineering: Robert Thompson
+Email: robert.thompson@acmecorp.com
+Phone: (650) 555-0200
+Server Access IP: 10.0.1.50
+Workstation MAC: AA:BB:CC:DD:EE:01
+
+Senior Engineer: Lisa Chen
+Email: lisa.chen@acmecorp.com
+Phone: (650) 555-0201
+Server Access IP: 10.0.1.51
+Workstation MAC: AA:BB:CC:DD:EE:02
+
+Staff Engineer: Kevin Johnson
+Email: kevin.johnson@acmecorp.com
+Phone: (650) 555-0202
+Server Access IP: 10.0.1.52
+Workstation MAC: AA:BB:CC:DD:EE:03
+
+SALES DEPARTMENT
+----------------
+VP of Sales: Patricia Garcia
+Email: patricia.garcia@acmecorp.com
+Phone: (212) 555-0300
+Corporate Card: 4532-0151-1283-0366
+
+Sales Manager: Thomas Anderson
+Email: thomas.anderson@acmecorp.com
+Phone: (212) 555-0301
+Corporate Card: 5425-2334-3010-9903
+
+Account Executive: Susan Miller
+Email: susan.miller@acmecorp.com
+Phone: (212) 555-0302
+Corporate Card: 3714-496353-98431
+
+CUSTOMER SUPPORT
+----------------
+Support Manager: Brian Wilson
+Email: brian.wilson@acmecorp.com
+Phone: 1-800-555-0400
+Support Hotline: 1-888-555-HELP
+
+Support Specialist: Maria Rodriguez
+Email: maria.rodriguez@acmecorp.com
+Phone: (512) 555-0401
+
+Support Specialist: James Lee
+Email: james.lee@acmecorp.com
+Phone: (512) 555-0402
+
+NETWORK INFRASTRUCTURE
+----------------------
+Primary DNS: 8.8.8.8
+Secondary DNS: 8.8.4.4
+Office Router: 192.168.1.1
+Guest Network: 192.168.2.1
+VPN Gateway: 10.10.10.1
+
+DEVICE INVENTORY
+----------------
+Conference Room A: 00:11:22:33:44:55
+Conference Room B: 00:11:22:33:44:56
+Lobby Printer: 66:77:88:99:AA:BB
+HR Printer: CC:DD:EE:FF:00:11
+
+EMERGENCY CONTACTS
+------------------
+Security: (415) 555-9999
+Facilities: (415) 555-9998
+IT Helpdesk: helpdesk@acmecorp.com
+
+This document contains confidential information. Do not share externally.
+
+Please confirm receipt by emailing hr@acmecorp.com or calling (415) 555-1234.
+
+Best regards,
+Jennifer Martinez
+Senior Vice President

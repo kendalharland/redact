@@ -1,0 +1,7 @@
+[
+  {"offset": 30, "length": 3, "type": "PERSON_1"},
+  {"offset": 103, "length": 12, "type": "EMAIL_ADDRESS_1"},
+  {"offset": 119, "length": 12, "type": "EMAIL_ADDRESS_2"},
+  {"offset": 166, "length": 14, "type": "PHONE_NUMBER_1"},
+  {"offset": 185, "length": 12, "type": "PHONE_NUMBER_2"}
+]

@@ -1,0 +1,7 @@
+[
+  {"offset": 13, "length": 13, "type": "PERSON_1"},
+  {"offset": 56, "length": 19, "type": "CREDIT_CARD_1"},
+  {"offset": 88, "length": 13, "type": "IP_ADDRESS_1"},
+  {"offset": 107, "length": 17, "type": "MAC_ADDRESS_1"},
+  {"offset": 131, "length": 25, "type": "EMAIL_ADDRESS_1"}
+]

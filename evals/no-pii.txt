@@ -1,0 +1,3 @@
+The weather is sunny today. The temperature is 72 degrees.
+There are many birds in the park. The trees are green.
+This is a regular document with no sensitive information.
