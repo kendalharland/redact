@@ -1,0 +1,312 @@
+EMPLOYEE DIRECTORY - ACME CORPORATION
+
+EXECUTIVE LEADERSHIP
+CEO: Margaret Chen
+CFO: William Richardson
+COO: Priya Sharma
+CTO: Alexander Petrov
+CMO: Isabella Rodriguez
+
+BOARD OF DIRECTORS
+Chairman: Robert Nakamura
+Vice Chair: Elizabeth Warren-Smith
+Director: Mohammed Al-Rashid
+Director: Catherine O'Brien
+Director: Dmitri Volkov
+Director: Fatima Hassan
+Director: Giovanni Rossi
+
+ENGINEERING DEPARTMENT
+
+VP of Engineering: Thomas Anderson
+Senior Director: Yuki Tanaka
+Director of Platform: Benjamin Okonkwo
+Director of Infrastructure: Sarah Mitchell
+
+Platform Team:
+- Staff Engineer: Marcus Johnson
+- Senior Engineer: Aisha Patel
+- Senior Engineer: Christopher Lee
+- Engineer: Elena Kowalski
+- Engineer: Daniel Kim
+- Engineer: Olivia Thompson
+- Junior Engineer: James Wilson
+- Junior Engineer: Maria Santos
+
+Infrastructure Team:
+- Staff Engineer: Andrew Chang
+- Senior Engineer: Rebecca Martinez
+- Senior Engineer: Kevin O'Sullivan
+- Engineer: Nadia Petrova
+- Engineer: Samuel Adeyemi
+- Engineer: Rachel Green
+- Junior Engineer: Michael Brown
+- Junior Engineer: Sofia Hernandez
+
+Mobile Team:
+- Lead Engineer: Patrick Murphy
+- Senior Engineer: Ayumi Nakamura
+- Senior Engineer: Carlos Mendoza
+- Engineer: Hannah Schmidt
+- Engineer: David Park
+- Junior Engineer: Emma Davis
+- Junior Engineer: Lucas Ferreira
+
+Web Team:
+- Lead Engineer: Jennifer Walsh
+- Senior Engineer: Raj Gupta
+- Senior Engineer: Nicole Anderson
+- Engineer: Brandon Taylor
+- Engineer: Mei Lin Wong
+- Junior Engineer: Joshua Miller
+- Junior Engineer: Amanda Clark
+
+DevOps Team:
+- Lead Engineer: Brian O'Connor
+- Senior Engineer: Svetlana Ivanova
+- Engineer: Ryan Peterson
+- Engineer: Kenji Watanabe
+- Junior Engineer: Ashley Roberts
+
+PRODUCT DEPARTMENT
+
+VP of Product: Michelle Liu
+Director of Product: Fernando Gonzalez
+Senior PM: Christine Taylor
+Senior PM: Ahmed Malik
+PM: Victoria Chen
+PM: Nathan Brooks
+Associate PM: Stephanie Kim
+Associate PM: Derek Washington
+
+UX/Design Team:
+- Head of Design: Alexandra Morrison
+- Senior Designer: Omar Hassan
+- Senior Designer: Julia Schneider
+- Designer: Tyler Jackson
+- Designer: Ingrid Larsson
+- Junior Designer: Megan Foster
+
+SALES DEPARTMENT
+
+VP of Sales: Richard Thompson
+Regional Director (West): Linda Martinez
+Regional Director (East): Jonathan Edwards
+Regional Director (Central): Barbara Wilson
+
+West Coast Team:
+- Senior AE: Gregory Adams
+- Senior AE: Michelle Park
+- AE: Steven Rodriguez
+- AE: Kimberly Nguyen
+- SDR: Anthony Russo
+- SDR: Diana Popov
+
+East Coast Team:
+- Senior AE: Harold Jenkins
+- Senior AE: Vanessa Williams
+- AE: Philip Okafor
+- AE: Christina Papadopoulos
+- SDR: Edward Kim
+- SDR: Samantha Jones
+
+Central Region Team:
+- Senior AE: Walter Schmidt
+- Senior AE: Rosa Delgado
+- AE: Jeffrey Thompson
+- AE: Monica Sharma
+- SDR: Benjamin Franklin
+- SDR: Jasmine Lee
+
+MARKETING DEPARTMENT
+
+VP of Marketing: Angela Davis
+Director of Brand: Peter Sullivan
+Director of Growth: Natasha Romanova
+Content Manager: Victor Hugo
+Social Media Lead: Lisa Simpson
+Events Manager: George Costanza
+
+Marketing Team:
+- Senior Marketing Manager: Helen Troy
+- Marketing Manager: Sean Murphy
+- Marketing Manager: Fatou Diallo
+- Marketing Specialist: Brent Taylor
+- Marketing Specialist: Yolanda Chen
+- Marketing Coordinator: Ian McGregor
+
+HUMAN RESOURCES
+
+VP of HR: Dorothy Gale
+HR Director: Frank Castle
+Senior HR Manager: Alice Wonderland
+HR Manager: Bruce Wayne
+HR Coordinator: Clark Kent
+HR Coordinator: Diana Prince
+Recruiter: Peter Parker
+Recruiter: Tony Stark
+
+FINANCE DEPARTMENT
+
+Controller: Janet Van Dyne
+Senior Accountant: Scott Lang
+Senior Accountant: Hope Pym
+Accountant: Wanda Maximoff
+Accountant: Vision Android
+AP Specialist: Stephen Strange
+AR Specialist: Wong Chen
+
+LEGAL DEPARTMENT
+
+General Counsel: Matthew Murdock
+Senior Attorney: Jennifer Walters
+Attorney: Foggy Nelson
+Paralegal: Karen Page
+Legal Assistant: Trish Walker
+
+CUSTOMER SUCCESS
+
+VP of Customer Success: Charles Xavier
+Director of Support: Jean Grey
+Senior CSM: Scott Summers
+Senior CSM: Ororo Munroe
+CSM: Bobby Drake
+CSM: Warren Worthington
+Support Lead: Hank McCoy
+Support Agent: Rogue Marie
+Support Agent: Remy LeBeau
+Support Agent: Anna Marie
+
+IT DEPARTMENT
+
+IT Director: Nick Fury
+Senior SysAdmin: Maria Hill
+SysAdmin: Phil Coulson
+SysAdmin: Melinda May
+Help Desk Lead: Leo Fitz
+Help Desk: Jemma Simmons
+Help Desk: Daisy Johnson
+
+FACILITIES
+
+Facilities Manager: Happy Hogan
+Security Lead: Pepper Potts
+Office Manager: James Rhodes
+
+RECENT COMMUNICATIONS
+
+Email from Margaret Chen to all staff:
+"Please welcome our newest team members: Zachary Williams, Penelope Cruz, and Harrison Ford who join our engineering team this week."
+
+Meeting notes from William Richardson:
+"Discussed Q3 projections with Priya Sharma and Alexander Petrov. Action items assigned to Isabella Rodriguez for follow-up."
+
+Slack message from Thomas Anderson:
+"Great work on the release, Yuki Tanaka, Benjamin Okonkwo, and Sarah Mitchell! The team really came together."
+
+Performance review submitted by Marcus Johnson:
+"Aisha Patel and Christopher Lee exceeded expectations this quarter. Elena Kowalski and Daniel Kim showed significant improvement."
+
+Project update from Andrew Chang:
+"Rebecca Martinez and Kevin O'Sullivan completed the migration. Nadia Petrova and Samuel Adeyemi are working on documentation."
+
+Customer feedback regarding service from Bobby Drake:
+"Warren Worthington and Hank McCoy provided excellent support. Special thanks to Rogue Marie for going above and beyond."
+
+Incident report filed by Nick Fury:
+"Maria Hill and Phil Coulson responded to the outage. Melinda May coordinated with Leo Fitz and Jemma Simmons for resolution."
+
+TRAINING SCHEDULE
+
+Monday: New hire orientation with Dorothy Gale
+Tuesday: Security training with Nick Fury
+Wednesday: Product overview with Michelle Liu
+Thursday: Sales methodology with Richard Thompson
+Friday: Culture session with Angela Davis
+
+UPCOMING BIRTHDAYS
+
+January: Margaret Chen, Thomas Anderson, Marcus Johnson
+February: William Richardson, Yuki Tanaka, Aisha Patel
+March: Priya Sharma, Benjamin Okonkwo, Christopher Lee
+April: Alexander Petrov, Sarah Mitchell, Elena Kowalski
+May: Isabella Rodriguez, Andrew Chang, Daniel Kim
+June: Robert Nakamura, Rebecca Martinez, Olivia Thompson
+July: Elizabeth Warren-Smith, Kevin O'Sullivan, James Wilson
+August: Mohammed Al-Rashid, Nadia Petrova, Maria Santos
+September: Catherine O'Brien, Samuel Adeyemi, Patrick Murphy
+October: Dmitri Volkov, Rachel Green, Ayumi Nakamura
+November: Fatima Hassan, Michael Brown, Carlos Mendoza
+December: Giovanni Rossi, Sofia Hernandez, Hannah Schmidt
+
+EMERGENCY CONTACTS
+
+Primary: Margaret Chen (CEO)
+Secondary: William Richardson (CFO)
+IT Emergency: Nick Fury
+Facilities Emergency: Happy Hogan
+HR Emergency: Dorothy Gale
+
+After-hours contacts:
+- Engineering: Thomas Anderson or Yuki Tanaka
+- Sales: Richard Thompson or Linda Martinez
+- Support: Charles Xavier or Jean Grey
+
+VENDOR CONTACTS
+
+Legal Services: Harvey Specter, Specter & Associates
+Accounting: Louis Litt, Litt Accounting
+Insurance: Jessica Pearson, Pearson Insurance
+Catering: Monica Geller, Central Perk Catering
+Security: John McClane, Nakatomi Security
+Cleaning: Walter White, Crystal Clean Services
+
+CONFERENCE SPEAKERS (UPCOMING)
+
+Tech Summit 2024:
+- Keynote: Margaret Chen
+- Panel: Alexander Petrov, Thomas Anderson, Michelle Liu
+- Workshop: Yuki Tanaka, Benjamin Okonkwo
+
+Sales Conference:
+- Keynote: Richard Thompson
+- Training: Linda Martinez, Jonathan Edwards
+- Best Practices: Gregory Adams, Harold Jenkins
+
+HR Summit:
+- Keynote: Dorothy Gale
+- Panel: Frank Castle, Alice Wonderland
+- Workshop: Bruce Wayne, Clark Kent
+
+PATENT HOLDERS
+
+Patent #12345: Alexander Petrov, Thomas Anderson
+Patent #12346: Yuki Tanaka, Marcus Johnson
+Patent #12347: Andrew Chang, Rebecca Martinez
+Patent #12348: Patrick Murphy, Ayumi Nakamura
+Patent #12349: Jennifer Walsh, Raj Gupta
+
+AWARDS AND RECOGNITION
+
+Employee of the Year: Aisha Patel
+Rising Star: Sofia Hernandez
+Innovation Award: Benjamin Okonkwo
+Customer Champion: Bobby Drake
+Team Player: Rachel Green
+Leadership Excellence: Michelle Liu
+
+MENTORSHIP PROGRAM
+
+Mentor: Margaret Chen - Mentee: Victoria Chen
+Mentor: Thomas Anderson - Mentee: James Wilson
+Mentor: Michelle Liu - Mentee: Stephanie Kim
+Mentor: Richard Thompson - Mentee: Anthony Russo
+Mentor: Angela Davis - Mentee: Yolanda Chen
+Mentor: Dorothy Gale - Mentee: Peter Parker
+
+COMMITTEE MEMBERS
+
+Diversity Committee: Priya Sharma, Mohammed Al-Rashid, Fatima Hassan, Aisha Patel, Carlos Mendoza
+Safety Committee: Nick Fury, Happy Hogan, Phil Coulson, Leo Fitz
+Social Committee: Angela Davis, Lisa Simpson, George Costanza, Sean Murphy
+Green Initiative: Isabella Rodriguez, Helen Troy, Ingrid Larsson, Tyler Jackson

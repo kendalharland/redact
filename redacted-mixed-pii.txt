@@ -1,0 +1,5 @@
+Meeting with <PERSON_1> tomorrow.
+Her credit card is <CREDIT_CARD_1>.
+Server IP: <IP_ADDRESS_1>
+MAC: <MAC_ADDRESS_1>
+Email <EMAIL_ADDRESS_1>
