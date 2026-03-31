@@ -48,12 +48,18 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .controls-header {
+        .controls-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
+        }
+
+        .controls-row + .controls-row {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
         }
 
         .pattern-types {
@@ -118,6 +124,39 @@
 
         .bleep-toggle:hover {
             background: #e0e0e0;
+        }
+
+        .api-key-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .api-key-section label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .api-key-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-family: monospace;
+        }
+
+        .api-key-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .api-key-input::placeholder {
+            color: #999;
         }
 
         .main-content {
@@ -273,6 +312,17 @@
             border-radius: 5px;
             margin-bottom: 15px;
             font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .api-warning.hidden {
+            display: none;
+        }
+
+        .api-warning-icon {
+            font-size: 1.1rem;
         }
     </style>
 </head>
@@ -284,20 +334,27 @@
         </header>
 
         <div class="error-message" id="error"></div>
-        <div class="api-warning" id="api-warning" style="display: none;">
-            API key not configured. Person names and obfuscated data detection are disabled.
+        <div class="api-warning" id="api-warning">
+            <span class="api-warning-icon">&#9888;</span>
+            <span>Enter your Anthropic API key above to enable Person Names and Obfuscated Data detection.</span>
         </div>
 
         <div class="controls">
-            <div class="controls-header">
-                <div class="pattern-types" id="pattern-types">
-                    <!-- Populated by JavaScript -->
+            <div class="controls-row">
+                <div class="api-key-section">
+                    <label for="api-key">Anthropic API Key:</label>
+                    <input type="password" id="api-key" class="api-key-input" placeholder="sk-ant-...">
                 </div>
                 <div class="options">
                     <label class="bleep-toggle">
                         <input type="checkbox" id="bleep-mode">
                         <span>Bleep Mode (***)</span>
                     </label>
+                </div>
+            </div>
+            <div class="controls-row">
+                <div class="pattern-types" id="pattern-types">
+                    <!-- Populated by JavaScript -->
                 </div>
             </div>
         </div>
@@ -338,6 +395,7 @@
         const outputEl = document.getElementById('output');
         const submitBtn = document.getElementById('submit-btn');
         const bleepMode = document.getElementById('bleep-mode');
+        const apiKeyInput = document.getElementById('api-key');
         const patternTypesEl = document.getElementById('pattern-types');
         const errorEl = document.getElementById('error');
         const apiWarningEl = document.getElementById('api-warning');
@@ -345,7 +403,6 @@
         const outputStats = document.getElementById('output-stats');
 
         let patternTypes = [];
-        let hasAPIKey = false;
         let isLoading = false;
 
         // Initialize
@@ -354,21 +411,44 @@
                 const resp = await fetch('/api/types');
                 const data = await resp.json();
                 patternTypes = data.types;
-                hasAPIKey = data.hasAPIKey;
-
-                if (!hasAPIKey) {
-                    apiWarningEl.style.display = 'block';
-                }
-
                 renderPatternTypes();
+                updateAPIKeyState();
             } catch (err) {
                 showError('Failed to load pattern types: ' + err.message);
             }
         }
 
+        function hasAPIKey() {
+            return apiKeyInput.value.trim() !== '';
+        }
+
+        function updateAPIKeyState() {
+            const hasKey = hasAPIKey();
+            apiWarningEl.classList.toggle('hidden', hasKey);
+
+            // Update LLM type checkboxes
+            patternTypesEl.querySelectorAll('.pattern-type').forEach(el => {
+                const checkbox = el.querySelector('input[type="checkbox"]');
+                const typeName = checkbox.value;
+                const type = patternTypes.find(t => t.name === typeName);
+
+                if (type && type.requiresLLM) {
+                    el.classList.toggle('disabled', !hasKey);
+                    checkbox.disabled = !hasKey;
+                    if (hasKey && !checkbox.checked) {
+                        checkbox.checked = true;
+                    } else if (!hasKey) {
+                        checkbox.checked = false;
+                    }
+                }
+            });
+        }
+
         function renderPatternTypes() {
+            const hasKey = hasAPIKey();
+
             patternTypesEl.innerHTML = patternTypes.map(type => {
-                const disabled = type.requiresLLM && !hasAPIKey;
+                const disabled = type.requiresLLM && !hasKey;
                 const checked = !disabled ? 'checked' : '';
                 const disabledAttr = disabled ? 'disabled' : '';
                 const disabledClass = disabled ? 'disabled' : '';
@@ -456,7 +536,8 @@
                     body: JSON.stringify({
                         text: text,
                         types: types,
-                        bleep_mode: bleepMode.checked
+                        bleep_mode: bleepMode.checked,
+                        api_key: apiKeyInput.value.trim()
                     })
                 });
 
@@ -485,6 +566,10 @@
 
         inputEl.addEventListener('input', () => {
             inputStats.textContent = `${inputEl.value.length} characters`;
+        });
+
+        apiKeyInput.addEventListener('input', () => {
+            updateAPIKeyState();
         });
 
         // Initialize on load

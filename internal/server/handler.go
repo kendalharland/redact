@@ -13,9 +13,10 @@ import (
 
 // RedactRequest is the JSON request body for the redact endpoint.
 type RedactRequest struct {
-	Text     string   `json:"text"`
-	Types    []string `json:"types"`
-	BleepMode bool    `json:"bleep_mode"`
+	Text      string   `json:"text"`
+	Types     []string `json:"types"`
+	BleepMode bool     `json:"bleep_mode"`
+	APIKey    string   `json:"api_key"`
 }
 
 // RedactResponse is the JSON response body for the redact endpoint.
@@ -27,23 +28,16 @@ type RedactResponse struct {
 
 // Handler handles HTTP requests for the redact server.
 type Handler struct {
-	cfg      *config.Config
-	client   *config.Client
-	registry *matcher.Registry
+	model string
 }
 
 // NewHandler creates a new Handler.
 func NewHandler(model string) *Handler {
-	cfg := config.LoadConfig()
-	if model != "" {
-		cfg.Model = model
+	if model == "" {
+		model = "claude-sonnet-4-20250514"
 	}
-	client := config.NewClient(cfg)
-
 	return &Handler{
-		cfg:      cfg,
-		client:   client,
-		registry: buildRegistry(client, cfg.HasAPIKey),
+		model: model,
 	}
 }
 
@@ -84,6 +78,16 @@ func (h *Handler) HandleRedact(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Create config and client based on provided API key
+	hasAPIKey := req.APIKey != ""
+	cfg := &config.Config{
+		APIKey:    req.APIKey,
+		Model:     h.model,
+		HasAPIKey: hasAPIKey,
+	}
+	client := config.NewClient(cfg)
+	registry := buildRegistry(client, hasAPIKey)
+
 	// Build set of enabled types
 	enabledTypes := make(map[string]bool)
 	for _, t := range req.Types {
@@ -93,7 +97,7 @@ func (h *Handler) HandleRedact(w http.ResponseWriter, r *http.Request) {
 	// Run the pipeline
 	p := pipeline.NewPipeline(req.Text)
 
-	matchers := h.registry.GetAll()
+	matchers := registry.GetAll()
 	for _, m := range matchers {
 		// Skip if type not enabled
 		typeName := string(m.Type())
@@ -110,8 +114,8 @@ func (h *Handler) HandleRedact(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Add obfuscated matcher if API key is available and OBFUSCATED is enabled
-	if h.cfg.HasAPIKey && (len(enabledTypes) == 0 || enabledTypes["OBFUSCATED"]) {
-		obfuscatedMatcher := matcher.NewObfuscatedMatcher(h.client, pipeline.AllPatternTypes())
+	if hasAPIKey && (len(enabledTypes) == 0 || enabledTypes["OBFUSCATED"]) {
+		obfuscatedMatcher := matcher.NewObfuscatedMatcher(client, pipeline.AllPatternTypes())
 		matches, err := obfuscatedMatcher.Match(req.Text)
 		if err == nil {
 			p.AddMatches(pipeline.Obfuscated, matches)
@@ -143,13 +147,12 @@ func (h *Handler) HandleTypes(w http.ResponseWriter, r *http.Request) {
 		{"name": "IP_ADDRESS", "label": "IP Addresses", "requiresLLM": false},
 		{"name": "MAC_ADDRESS", "label": "MAC Addresses", "requiresLLM": false},
 		{"name": "PHONE_NUMBER", "label": "Phone Numbers", "requiresLLM": false},
-		{"name": "PERSON", "label": "Person Names", "requiresLLM": true, "enabled": h.cfg.HasAPIKey},
-		{"name": "OBFUSCATED", "label": "Obfuscated Data", "requiresLLM": true, "enabled": h.cfg.HasAPIKey},
+		{"name": "PERSON", "label": "Person Names", "requiresLLM": true},
+		{"name": "OBFUSCATED", "label": "Obfuscated Data", "requiresLLM": true},
 	}
 
 	writeJSON(w, http.StatusOK, map[string]interface{}{
-		"types":     types,
-		"hasAPIKey": h.cfg.HasAPIKey,
+		"types": types,
 	})
 }
 
